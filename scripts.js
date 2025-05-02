@@ -1,5 +1,35 @@
 // تحميل الصفحة
 document.addEventListener('DOMContentLoaded', function() {
+    // التحقق من نموذج الاتصال
+    const messageTextarea = document.getElementById('message');
+    const charCountSpan = document.getElementById('charCount');
+    const emailInput = document.getElementById('email');
+    const emailError = document.getElementById('emailError');
+    
+    if (messageTextarea && charCountSpan) {
+        // تحديث عدد الأحرف عند الكتابة
+        messageTextarea.addEventListener('input', function() {
+            const currentLength = this.value.length;
+            charCountSpan.textContent = currentLength;
+            
+            // تغيير لون العداد إذا اقترب من الحد الأقصى
+            if (currentLength > 1800) {
+                charCountSpan.style.color = '#e74c3c';
+            } else if (currentLength > 1500) {
+                charCountSpan.style.color = '#f39c12';
+            } else {
+                charCountSpan.style.color = '';
+            }
+        });
+    }
+    
+    if (emailInput && emailError) {
+        // التحقق من صحة البريد الإلكتروني عند الخروج من الحقل
+        emailInput.addEventListener('blur', function() {
+            validateEmail(this.value);
+        });
+    }
+    
     // تحريك العداد
     const counters = document.querySelectorAll('.counter');
     
@@ -198,3 +228,46 @@ document.addEventListener('DOMContentLoaded', function() {
     
     loadCairoFont();
 });
+
+// التحقق من صحة البريد الإلكتروني
+function validateEmail(email) {
+    const emailError = document.getElementById('emailError');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if (!emailRegex.test(email)) {
+        emailError.textContent = 'الرجاء إدخال بريد إلكتروني صحيح';
+        return false;
+    } else {
+        emailError.textContent = '';
+        return true;
+    }
+}
+
+// التحقق من النموذج وإرساله
+function validateAndSubmit() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value;
+    
+    // التحقق من صحة البريد الإلكتروني
+    if (!validateEmail(email)) {
+        return false;
+    }
+    
+    // التحقق من طول الرسالة
+    if (message.length > 2000) {
+        document.getElementById('charCount').style.color = '#e74c3c';
+        return false;
+    }
+    
+    // إرسال النموذج عبر البريد الإلكتروني
+    const mailtoLink = `mailto:eisra.seifeldin@tallysolutions.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`من: ${name}\nالبريد الإلكتروني: ${email}\n\n${message}`)}`;    
+    window.location.href = mailtoLink;
+    
+    // إظهار رسالة نجاح
+    alert('تم إرسال رسالتك بنجاح!');
+    
+    // منع إرسال النموذج بالطريقة التقليدية
+    return false;
+}
