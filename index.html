@@ -15,6 +15,10 @@
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- أيقونة الموقع (Favicon) -->
+    <link rel="icon" href="images/logo2.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/logo2.ico" type="image/x-icon">
 </head>
 <body>
     <header>
@@ -41,7 +45,7 @@
                     <ul>
                         <li><a href="#">تعرف علينا</a></li>
                         <li><a href="#">المنتجات</a></li>
-                        <li><a href="#">تواصل معنا</a></li>
+                        <li><a href="#contact-section">تواصل معنا</a></li>
                     </ul>
                 </nav>
             </div>
@@ -205,7 +209,7 @@
                     </div>
                     <div class="video-content">
                         <video controls autoplay loop>
-                            <source src="videos/tallyprime-mena-arabic.mp4" type="video/mp4">
+                            <source src="https://resources.tallysolutions.com/mena/wp-content/uploads/2023/do-more-videos/global-website-assets-video.webm" type="video/webm">
                         </video>
                     </div>
                 </div>
@@ -216,7 +220,7 @@
             <div class="container">
                 <div class="content-wrap">
                     <div class="image-content">
-                        <img src="images/dashboard.png" alt="لوحة التحكم">
+                        <img src="images/Picture4.png" alt="لوحة التحكم">
                     </div>
                     <div class="text-content">
                         <h2>لوحة تحكم تفاعلية وذكية في TallyPrime</h2>
@@ -234,8 +238,8 @@
                         <p>استورد سجلاتك ومعاملاتك بسهولة من Excel إلى TallyPrime بخطوات بسيطة. مع مرونة كاملة في استيراد البيانات مهما كانت طريقة تنظيمها أو هيكلتها في Excel، مما يجعل نقل البيانات من أي برنامج آخر خاليًا من المتاعب</p>
                     </div>
                     <div class="video-content">
-                        <video controls autoplay loop>
-                            <source src="videos/import-excel-tally.mp4" type="video/mp4">
+                        <video class="doMoreVideo" playsinline autoplay muted loop>
+                            <source src="https://resources.tallysolutions.com/mena/wp-content/uploads/2023/do-more-videos/reports-dashboard.mp4" type="video/mp4">
                         </video>
                     </div>
                 </div>
@@ -246,8 +250,8 @@
             <div class="container">
                 <div class="content-wrap">
                     <div class="video-content">
-                        <video controls autoplay loop>
-                            <source src="videos/whatsapp-share.mp4" type="video/mp4">
+                        <video class="doMoreVideo" playsinline autoplay muted loop>
+                            <source src="https://resources.tallysolutions.com/mena/wp-content/uploads/2023/do-more-videos/import-excel-tally.mp4" type="video/mp4">
                         </video>
                     </div>
                     <div class="text-content">
@@ -336,11 +340,11 @@
             </div>
         </section>
 
-        <section class="contact-form">
+        <section id="contact-section" class="contact-form">
             <div class="container">
                 <h2 class="animate__animated animate__fadeInUp">تواصل معنا</h2>
                 <p class="animate__animated animate__fadeInUp" style="animation-delay: 0.2s">يمكنك مراسلتنا في أي وقت وسنقوم بالرد عليك في أقرب وقت ممكن</p>
-                <form id="contactForm" class="animate__animated animate__fadeInUp" style="animation-delay: 0.4s" onsubmit="return validateAndSubmit()">
+                <form id="contactForm" class="animate__animated animate__fadeInUp" style="animation-delay: 0.4s">
                     <div class="form-group">
                         <label for="name">الاسم الكامل</label>
                         <input type="text" id="name" name="name" required>
@@ -359,7 +363,7 @@
                         <textarea id="message" name="message" rows="6" maxlength="2000" required></textarea>
                         <small class="char-count"><span id="charCount">0</span> / 2000 حرف</small>
                     </div>
-                    <button type="submit" class="btn">إرسال الرسالة</button>
+                    <button type="submit" id="submitButton" class="btn">إرسال الرسالة</button>
                 </form>
             </div>
         </section>
@@ -400,7 +404,11 @@
     <!-- الرابط المحلي سيكون كالتالي: -->
     <!-- <script src="libs/bootstrap/bootstrap.bundle.min.js"></script> -->
     
-    <!-- ملف JavaScript الخاص بالموقع -->
+    <!-- EmailJS لإرسال رسائل البريد الإلكتروني مباشرة من JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <!-- ملفات JavaScript الخاصة بالموقع -->
     <script src="scripts.js"></script>
+    <script src="js/email-service.js"></script>
 </body>
 </html>
