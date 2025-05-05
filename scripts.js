@@ -1,4 +1,41 @@
 // تحميل الصفحة
+/**
+ * التحقق من صحة النموذج قبل الإرسال
+ * @returns {boolean} - صحيح إذا كان النموذج صالحًا
+ */
+function validateFormBeforeSubmit() {
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const subjectInput = document.getElementById('subject');
+    const messageTextarea = document.getElementById('message');
+    const emailError = document.getElementById('emailError');
+    
+    // التحقق من وجود الحقول
+    if (!nameInput || !emailInput || !subjectInput || !messageTextarea) {
+        alert('حدث خطأ في النموذج. الرجاء المحاولة مرة أخرى.');
+        return false;
+    }
+    
+    // التحقق من صحة البريد الإلكتروني
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailInput.value)) {
+        if (emailError) {
+            emailError.textContent = 'الرجاء إدخال بريد إلكتروني صحيح';
+        } else {
+            alert('الرجاء إدخال بريد إلكتروني صحيح');
+        }
+        return false;
+    }
+    
+    // التحقق من طول الرسالة
+    if (messageTextarea.value.length < 10) {
+        alert('الرجاء إدخال رسالة لا تقل عن 10 أحرف');
+        return false;
+    }
+    
+    return true;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // التحقق من نموذج الاتصال
     const messageTextarea = document.getElementById('message');
